@@ -17,4 +17,7 @@ export interface IUser{
     createdAt: Date | string,
     updatedAt: Date | string, 
     password: string
+    token?: string
 }
+
+export type IRegister = Omit<IUser , "_id" | "createdAt" | "updatedAt" | "token">;
