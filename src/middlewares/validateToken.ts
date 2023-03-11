@@ -19,7 +19,7 @@ const validateToken = (req : Request, res: Response, next :NextFunction ) => {
         return next()}
 
     } catch (error) {
-        res.status(400).json({ error: 'invalid token' })
+        res.status(403).json({ error: 'invalid token' })
     }
 }
 export default validateToken

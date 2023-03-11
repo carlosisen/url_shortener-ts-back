@@ -16,7 +16,7 @@ export interface IUser{
     email: string
     createdAt: Date | string,
     updatedAt: Date | string, 
-    password: string
+    password?: string
     token?: string
 }
 

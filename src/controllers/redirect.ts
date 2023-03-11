@@ -5,9 +5,11 @@ const redirect = async (req: Request, res: Response) => {
             const _id: string = req.params.url
             try{
                 const payload: any = await urlModel.findById(_id)
+                // hay que incluir un uso modificando el modelo.
                 if(payload.url){
+                    // poner redireccion
                 return res.status(200).json({msg: "estas yendo a la siguiente web", url: payload.url})}
-                return res.status(400).redirect("https://www.google.com/")
+                throw Error("No existe el ID")
             }catch(error: any){
                 console.log(error)
                 // redirigir a una pagina oficial de error

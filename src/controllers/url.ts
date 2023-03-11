@@ -4,14 +4,11 @@ import { checkUser } from "../models/user"
 import UrlModel from "../models/url"
 import {IUrl} from "../types"
 
-const insertUrl= async (req: Request , res: Response) =>{
-        if(!req.body){
-            console.log(req.body)
-          return  res.status(400).json({message: "No se ha enviado ningun dato"})
-        }
-        // ya tendria que haber pasa por un validator, quizas no sea necesario lo de arriba
+export const insertUrl= async (req: Request , res: Response) =>{
+        // ya tendria que haber pasa por un validator
         // comprueba si existe ya ese mail
-        const existUser= await checkUser({_id: req.body.idUser})
+        const id : string = req.body.idUser 
+        const existUser= await checkUser({_id: id})
         console.log(existUser, "existe usuario")
         if (!existUser){
             return res.status(400).json({message: "user not found"})
@@ -35,4 +32,18 @@ const insertUrl= async (req: Request , res: Response) =>{
 
 
 
-export default insertUrl
+export const getAllUrl = async (req: Request, res: Response)=> {
+        try{
+            const existUser = await checkUser({ _id: req.body.idUser })
+            if (!existUser) {
+                throw Error( "user not found" )
+            }
+            const allUrl = await urlModel.find({idUser : req.body.idUser})
+            console.log(allUrl)
+            return res.status(200).json(allUrl)
+        }catch(error : any){
+            return res.status(400).json({
+                    error: error.message
+            })
+        }
+}
