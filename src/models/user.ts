@@ -1,4 +1,4 @@
-import { userModel } from "../models/mongoModel"
+import { userModel } from "./mongoSchemas"
 
 export const checkUser= async (date: object) =>{
         try{

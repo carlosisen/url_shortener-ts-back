@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { userModel } from "../models/mongoModel"
+import { userModel } from "../models/mongoSchemas"
 import { checkUser } from "../models/user"
 import { IUser, IRegister } from "../types"
 import CryptoJS from "crypto-js"
@@ -19,12 +19,13 @@ const registerUser = async (req: Request, res: Response) => {
         return res.status(400).json({msg: "ya hay un usuario con ese email"})
     }
     try {
-        let user : IUser = await userModel.create({
+        let user : any = await userModel.create({
             ...newUser
         })
-         const token = tokenGenerator(user._id)
+        const token = tokenGenerator(user._id)
+        const responseData : IUser= {...user._doc, token}
 
-        return res.status(201).json({user, token, message: "User Creado" })
+        return res.status(201).json({user: {...responseData}, message: "User Creado" })
     } catch (error: any ) {
         console.log(error)
         return res.status(500).json({
@@ -54,7 +55,7 @@ export const loginUser = async (req: Request, res: Response) => {
             updatedAt: user[0].updatedAt,
             token: token
         }
-        return res.status(200).json({ userData })
+        return res.status(200).json({user: {...userData} })
         }
         console.log(userDataReq.password,  user[0].password, password)
        throw Error("email or password isen't correct")

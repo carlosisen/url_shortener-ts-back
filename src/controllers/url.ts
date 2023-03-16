@@ -1,5 +1,5 @@
 import {Request, Response} from "express"
-import {urlModel, userModel} from "../models/mongoModel"
+import {urlModel, userModel} from "../models/mongoSchemas"
 import { checkUser } from "../models/user"
 import UrlModel from "../models/url"
 import {IUrl} from "../types"
@@ -20,7 +20,7 @@ export const insertUrl= async (req: Request , res: Response) =>{
                 ...newUrl
             })
             const shortedURL = UrlModel.createUrl(payload._id as string)
-            return res.status(201).json({payload: payload, shortedURL,  message: "Creado"})
+            return res.status(201).json({url: [payload], shortedURL,  message: "Creado"})
         }catch(error : any){
             console.log(error)
             return res.status(500).json({

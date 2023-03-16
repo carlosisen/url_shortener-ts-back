@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { urlModel } from "../models/mongoModel"
+import { urlModel } from "../models/mongoSchemas"
 
 const redirect = async (req: Request, res: Response) => {
             const _id: string = req.params.url
@@ -8,7 +8,7 @@ const redirect = async (req: Request, res: Response) => {
                 // hay que incluir un uso modificando el modelo.
                 if(payload.url){
                     // poner redireccion
-                return res.status(200).json({msg: "estas yendo a la siguiente web", url: payload.url})}
+                return res.status(200).redirect(payload.url)}
                 throw Error("No existe el ID")
             }catch(error: any){
                 console.log(error)
