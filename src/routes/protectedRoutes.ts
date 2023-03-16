@@ -1,12 +1,13 @@
 import { Router } from "express"
-import { insertUrl } from "../controllers/url"
+import { insertUrl, getAllUrl, deleteUrl, updateUrl } from "../controllers/url"
 import { backValidation, urlValidator } from "../utils/validator"
 import validateToken from "../middlewares/validateToken"
-import { getAllUrl } from "../controllers/url"
 
 const urlRouter = Router()
 
-urlRouter.get("/getAll", validateToken, getAllUrl )
+urlRouter.get("/getall", validateToken,  getAllUrl )
 urlRouter.post("/create", urlValidator, backValidation, validateToken, insertUrl)
+urlRouter.delete("/delete", validateToken,  deleteUrl)
+urlRouter.post("/update", validateToken,  updateUrl)
 
 export default urlRouter

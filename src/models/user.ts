@@ -1,4 +1,5 @@
 import { userModel } from "./mongoSchemas"
+import CustomError from "../utils/customError"
 
 export const checkUser= async (date: object) =>{
         try{
@@ -8,6 +9,6 @@ export const checkUser= async (date: object) =>{
                 return true}
             return false
         }catch{
-            return false
+            throw new CustomError(400, "sorry, server has failed", "custom" )
         }
 }

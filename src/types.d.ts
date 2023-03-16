@@ -21,3 +21,8 @@ export interface IUser{
 }
 
 export type IRegister = Omit<IUser , "_id" | "createdAt" | "updatedAt" | "token">;
+
+export interface customError extends Error{
+    code: number,
+    name: string,
+}

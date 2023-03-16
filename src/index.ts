@@ -7,6 +7,7 @@ import redirect from "./controllers/redirect"
 import helmet from "helmet"
 import swaggerJsdoc from "swagger-jsdoc"; 
 import swaggerUi from "swagger-ui-express" ;
+import handleError  from "./middlewares/handleError"
 
 const app= express()
 const PORT = 3005
@@ -44,6 +45,7 @@ app.use(express.json());
 
 app.use("/chainsawurl", routes)
 app.get("/chainsaw/:url", redirect )
+app.use(handleError)
 
 app.use(
     "/api-docs",
