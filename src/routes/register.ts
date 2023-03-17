@@ -1,12 +1,12 @@
 import { Router } from "express"
-import insertUrl from "../controllers/url"
-import insertUser from "../controllers/user"
-
+import registerUser from "../controllers/user"
+import encryptPassword from "../middlewares/encryptPassword"
+import {backValidation, userValidator} from "../utils/validator"
+ 
 const registerRouter = Router()
 
 
-registerRouter.post("/url", insertUrl)
 
-registerRouter.post("/user", insertUser)
+registerRouter.post("/user", userValidator, backValidation ,encryptPassword, registerUser)
 
 export default registerRouter
