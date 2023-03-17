@@ -10,7 +10,6 @@ export const insertUrl= async (req: Request , res: Response, next : NextFunction
         const id : string = req.body.idUser 
         try{
             const existUser= await checkUser({_id: id})
-            console.log(existUser, "existe usuario")
             if (!existUser){
                 throw new CustomError(400, "user not found", "custom")
             }
@@ -22,7 +21,6 @@ export const insertUrl= async (req: Request , res: Response, next : NextFunction
             const shortedURL = UrlModel.createUrl(payload._id as string)
             return res.status(201).json({url: [payload], shortedURL,  message: "Creado"})
         }catch(error : any){
-            console.log(error)
             return next(error)
         
 }}
