@@ -16,5 +16,13 @@ export interface IUser{
     email: string
     createdAt: Date | string,
     updatedAt: Date | string, 
-    password: string
+    password?: string
+    token?: string
+}
+
+export type IRegister = Omit<IUser , "_id" | "createdAt" | "updatedAt" | "token">;
+
+export interface customError extends Error{
+    code: number,
+    name: string,
 }
