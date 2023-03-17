@@ -6,7 +6,7 @@ import dotenv from "dotenv"
 import redirect from "./controllers/redirect"
 
 const app= express()
-const PORT = 3005
+const PORT = 8080
 dotenv.config();
 
 
