@@ -5,7 +5,6 @@ const redirect = async (req: Request, res: Response) => {
             const _id: string = req.params.url
             try{
                 const payload: any = await urlModel.findByIdAndUpdate(_id, {$inc: {uses: 1}}, {returnDocument: "after"})
-                // hay que incluir un uso modificando el modelo.
                 if(payload.url){
                 return res.status(200).redirect(payload.url)}
                 throw Error("No existe el ID")
