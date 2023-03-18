@@ -14,7 +14,6 @@ const validateToken = (req : Request, res: Response, next :NextFunction ) => {
         if(typeof(token)=== "string"){
         const userVerified = jwt.verify(token, process.env.SECRET_KEY || "tokenExample123") as object;
         req.body= {...req.body, ...userVerified}
-        console.log(userVerified, req.body)
         return next()}
 
     } catch (error) {

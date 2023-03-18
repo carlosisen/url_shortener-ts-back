@@ -7,11 +7,9 @@ import tokenGenerator from "../utils/tokenGen"
 
 const registerUser = async (req: Request, res: Response) => {
     if (!req.body) {
-        console.log(req.body)
         return res.status(400).json({ message: "No se ha enviado ningun dato" })
     }
     const { ...newUser }: IRegister = (req.body)
-    console.log(newUser)
     const isExisted : boolean= await checkUser({email: newUser.email.toLowerCase()})
     if(isExisted){
         return res.status(400).json({msg: "ya hay un usuario con ese email"})
@@ -25,7 +23,6 @@ const registerUser = async (req: Request, res: Response) => {
 
         return res.status(201).json({user: {...responseData}, message: "User Creado" })
     } catch (error: any ) {
-        console.log(error)
         return res.status(500).json({
             message: " we couldn't complete your request",
             error: error
@@ -52,11 +49,11 @@ export const loginUser = async (req: Request, res: Response) => {
         }
         return res.status(200).json({user: {...userData} })
         }
-        console.log(userDataReq.password,  user[0].password, password)
+
        throw Error("email or password isen't correct")
         
     }catch(error: any){
-        console.log(error)
+
         const errorMsg= error.message
         return res.status(400).json({error: errorMsg})
     }

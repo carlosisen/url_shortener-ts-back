@@ -10,7 +10,6 @@ const redirect = async (req: Request, res: Response) => {
                 return res.status(200).redirect(payload.url)}
                 throw Error("No existe el ID")
             }catch(error: any){
-                console.log(error)
                 return res.status(404).json({msg: "no existe esta direccion"})
             }
 
@@ -25,7 +24,6 @@ export const frontRedirect = async (req: Request, res: Response) => {
         }
         throw Error("No existe el ID")
     } catch (error: any) {
-        console.log(error)
         return res.status(404).json({ msg: "no existe esta direccion" })
     }
 

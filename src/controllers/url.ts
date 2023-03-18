@@ -10,19 +10,16 @@ export const insertUrl= async (req: Request , res: Response, next : NextFunction
         const id : string = req.body.idUser 
         try{
             const existUser= await checkUser({_id: id})
-            console.log(existUser, "existe usuario")
             if (!existUser){
                 throw new CustomError(400, "user not found", "custom")
             }
             const {...newUrl} : IUrl = (req.body)
-            console.log(newUrl)
             const payload : IUrl = await urlModel.create({
                 ...newUrl
             })
             const shortedURL = UrlModel.createUrl(payload._id as string)
             return res.status(201).json({url: [payload], shortedURL,  message: "Creado"})
         }catch(error : any){
-            console.log(error)
             return next(error)
         
 }}
@@ -34,7 +31,6 @@ export const getAllUrl = async (req: Request, res: Response, next: NextFunction)
                 throw new CustomError(400, "user not found", "custom" )
             }
             const allUrl = await urlModel.find({idUser : req.body.idUser})
-            console.log(allUrl)
             return res.status(200).json(allUrl)
         }catch(error : any){
             return next(error)
@@ -52,7 +48,6 @@ export const deleteUrl = async (req: Request, res: Response, next: NextFunction)
         if( urlDeleted === null) {
             throw new CustomError( 400 ,"url doesn't exist ", "custom")
         }
-        console.log(urlDeleted, "esta borrado")
         return res.status(204).send({msg: "url Deleted"})
     }catch(err) {
         return next(err)
