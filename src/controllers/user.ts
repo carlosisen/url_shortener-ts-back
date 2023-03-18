@@ -10,7 +10,6 @@ const registerUser = async (req: Request, res: Response) => {
         return res.status(400).json({ message: "No se ha enviado ningun dato" })
     }
     const { ...newUser }: IRegister = (req.body)
-    // comprueba si existe ya ese mail
     const isExisted : boolean= await checkUser({email: newUser.email.toLowerCase()})
     if(isExisted){
         return res.status(400).json({msg: "ya hay un usuario con ese email"})
@@ -33,15 +32,12 @@ const registerUser = async (req: Request, res: Response) => {
 
 export const loginUser = async (req: Request, res: Response) => {
     const { ...userDataReq }: IRegister = (req.body)
-    // comprueba si existe ya ese mail
     try{
         const user: any = await userModel.find({ email: userDataReq.email.toLowerCase() })
         if (!user.length) {
            throw Error("email or password isen't correct")}
-        // desencriptamos la contraseña
         const password: string = CryptoJS.AES.decrypt(user[0].password, process.env.SECRET_CRYPTO as string).toString(CryptoJS.enc.Utf8)
         if(userDataReq.password === password){
-        // creamos un token 
         const token = tokenGenerator(user[0]._id)
         const userData :IUser= {
             _id: user[0]._id,

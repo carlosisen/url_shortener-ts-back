@@ -48,7 +48,6 @@ export const deleteUrl = async (req: Request, res: Response, next: NextFunction)
         if( urlDeleted === null) {
             throw new CustomError( 400 ,"url doesn't exist ", "custom")
         }
-        console.log(urlDeleted, "esta borrado")
         return res.status(204).send({msg: "url Deleted"})
     }catch(err) {
         return next(err)

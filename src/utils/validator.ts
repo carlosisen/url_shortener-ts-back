@@ -19,7 +19,7 @@ export const userValidator = [
     body("name")
         .notEmpty()
         .isString()
-        .blacklist("{}[]*")
+        .blacklist("{}[]$")
         .trim()
         .escape()
         .withMessage("there is an error in your name"),
@@ -32,7 +32,7 @@ export const loginValidator = [
         .trim()
         .isLength({ min: 6 })
         .withMessage("El password debe contener al menos 5 caracteres"),
-    body("email")
+        body("email")
         .exists()
         .trim()
         .isEmail()
@@ -49,7 +49,7 @@ export const urlValidator = [
     body("notes")
         .optional()
         .isString()
-        .blacklist("{}[]*")
+        .blacklist("{}[]$")
         .trim()
         .escape()
         .withMessage("there is an error in your notes")

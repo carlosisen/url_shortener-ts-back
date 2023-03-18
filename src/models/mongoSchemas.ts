@@ -22,7 +22,7 @@ const urlSchema= new Schema( {
     }
 
     }, { versionKey: false, timestamps: true})
-    // quizas pueda dar error por no extender Document
+    
 const userSchema = new Schema({
     name: {
         type: String,
