@@ -19,7 +19,7 @@ export const userValidator = [
     body("name")
         .notEmpty()
         .isString()
-        .blacklist("{}[]$*")
+        .blacklist("{}[]$")
         .trim()
         .escape()
         .withMessage("there is an error in your name"),
