@@ -8,6 +8,6 @@ const urlRouter = Router()
 urlRouter.get("/getall", validateToken,  getAllUrl )
 urlRouter.post("/create", urlValidator, backValidation, validateToken, insertUrl)
 urlRouter.delete("/delete", validateToken,  deleteUrl)
-urlRouter.post("/update", validateToken,  updateUrl)
+urlRouter.post("/update", urlValidator, backValidation, validateToken,  updateUrl)
 
 export default urlRouter
