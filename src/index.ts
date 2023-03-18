@@ -7,7 +7,7 @@ import helmet from "helmet"
 import handleError  from "./middlewares/handleError"
 
 const app= express()
-const PORT = 3005
+const PORT = 8080
 dotenv.config();
 import "./config/connectionDB.ts"
 app.use(helmet())

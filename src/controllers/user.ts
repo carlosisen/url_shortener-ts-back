@@ -49,11 +49,9 @@ export const loginUser = async (req: Request, res: Response) => {
         }
         return res.status(200).json({user: {...userData} })
         }
-
        throw Error("email or password isen't correct")
         
     }catch(error: any){
-
         const errorMsg= error.message
         return res.status(400).json({error: errorMsg})
     }
