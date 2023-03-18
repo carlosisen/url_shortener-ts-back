@@ -14,7 +14,6 @@ export const insertUrl= async (req: Request , res: Response, next : NextFunction
                 throw new CustomError(400, "user not found", "custom")
             }
             const {...newUrl} : IUrl = (req.body)
-            console.log(newUrl)
             const payload : IUrl = await urlModel.create({
                 ...newUrl
             })
@@ -32,7 +31,6 @@ export const getAllUrl = async (req: Request, res: Response, next: NextFunction)
                 throw new CustomError(400, "user not found", "custom" )
             }
             const allUrl = await urlModel.find({idUser : req.body.idUser})
-            console.log(allUrl)
             return res.status(200).json(allUrl)
         }catch(error : any){
             return next(error)

@@ -15,7 +15,6 @@ const validateToken = (req : Request, res: Response, next :NextFunction ) => {
             // lo declaro como objeto para poder hacer el destructuring
         const userVerified = jwt.verify(token, process.env.SECRET_KEY || "tokenExample123") as object;
         req.body= {...req.body, ...userVerified}
-        console.log(userVerified, req.body)
         return next()}
 
     } catch (error) {
